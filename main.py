@@ -1,5 +1,5 @@
+import os
 from tkinter import *
-
 
 class App(Frame):
     def __init__(self, master=None):
@@ -13,18 +13,7 @@ class App(Frame):
         Button(self, text="Make Excel file", font=("", 10), command=self.convert_db).pack(pady=30)
 
     def new_entry(self):
-        class NewEntry(Frame):
-            def __init__(self, master=None):
-                Frame.__init__(self, master)
-                self.pack()
-            def gui(self):
-                Label(self,text="hello").pack()
-
-        new_entry = NewEntry()
-        new_entry.master.title("Make Entry")
-        new_entry.master.geometry("100x100+350+100")
-        new_entry.gui()
-        new_entry.mainloop()
+        os.system("py -3 new_entry.py")
         return
 
     def check_entry(self):
