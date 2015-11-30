@@ -1,10 +1,12 @@
 import os
 from tkinter import *
 
+
 class App(Frame):
     def __init__(self, master=None):
         Frame.__init__(self, master)
         self.pack()
+        self.gui()
 
     def gui(self):
         Label(self, text="Registration Panel", font=("", 20)).pack(pady=15)
@@ -28,14 +30,6 @@ class App(Frame):
 
 
 myapp = App()
-
-#
-# here are method calls to the window manager class
-#
 myapp.master.title("Registration Panel")
 myapp.master.geometry("500x350+500+100")
-myapp.gui()
-
-
-# start the program
 myapp.mainloop()

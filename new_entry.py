@@ -1,4 +1,5 @@
 import sqlite3
+from tkinter import messagebox
 from tkinter import *
 
 conn = sqlite3.connect("registration.db")
@@ -27,6 +28,7 @@ class NewEntry(Frame):
         self.email_id = StringVar(self)
         self.phone_no = StringVar(self)
         self.shirt_size = StringVar(self)
+        self.gui()
 
     def gui(self):
         Label(self, text="Slip No:", font=("", 12)).grid(row=0, sticky=E, ipadx=20, ipady=10)
@@ -49,20 +51,29 @@ class NewEntry(Frame):
         return
 
     def make_entry(self):
-        values = (self.slip_no.get(), self.name.get(), self.branch.get(), self.section.get(), self.phone_no.get(),
-                  self.email_id.get(), self.shirt_size.get())
-        try:
-            c.execute('insert into new_entries values (?,?,?,?,?,?,?)', values)
-            conn.commit()
-        except:
-            conn.rollback()
+        values = (self.slip_no.get(), self.name.get().upper(), self.branch.get().upper(), self.section.get().upper(),
+                  self.phone_no.get().upper(), self.email_id.get().upper(), self.shirt_size.get())
+        if self.slip_no.get().isdigit():
+            if len(self.slip_no.get()) == 0:
+                messagebox.showerror("Registration", message="Please enter Slip No.")
+            else:
+                if len(self.name.get()) == 0:
+                    messagebox.showerror("Registration", message="Please enter student name")
+                else:
+                    try:
+                        c.execute('insert into new_entries values (?,?,?,?,?,?,?)', values)
+                        conn.commit()
+                        Label(self, text="Successfully entered").grid(row=7, column=2)
+                    except:
+                        messagebox.showerror("Registration", message="Slip no. already enrolled")
+                        conn.rollback()
+        else:
+            messagebox.showerror("Registration", message="Enter a valid Slip No.")
         return
 
 
-myapp = NewEntry()
-myapp.master.title("Make Entry")
-myapp.master.geometry("500x350+500+100")
-
-myapp.gui()
-
-myapp.mainloop()
+if __name__ == '__main__':
+    myapp = NewEntry()
+    myapp.master.title("Make Entry")
+    myapp.master.geometry("500x350+500+100")
+    myapp.mainloop()
