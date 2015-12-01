@@ -1,10 +1,12 @@
 import os
 from tkinter import *
+# from check_entry import app
+from new_entry import NewEntry
 
 
 class App(Frame):
-    def __init__(self, master=None):
-        Frame.__init__(self, master)
+    def __init__(self):
+        Frame.__init__(self)
         self.pack()
         self.gui()
 
@@ -19,7 +21,7 @@ class App(Frame):
         return
 
     def check_entry(self):
-        print("working")
+        os.system("py -3 check_entry.py")
         return
 
     def convert_db(self):

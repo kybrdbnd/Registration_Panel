@@ -1,4 +1,5 @@
 import sqlite3
+import time
 from tkinter import *
 from tkinter import messagebox
 
@@ -7,8 +8,8 @@ c = conn.cursor()
 
 
 class CheckEntry(Frame):
-    def __init__(self, master=None):
-        Frame.__init__(self, master)
+    def __init__(self):
+        Frame.__init__(self)
         self.grid()
         self.name = StringVar(self)
         self.slip_no = StringVar(self)
@@ -51,6 +52,7 @@ class CheckEntry(Frame):
                 messagebox.showerror(title="Registration", message="Desired entry doesn't found")
             else:
                 self.slip_no_search()
+                self.slip_no.set("")
         return
 
     def name_search(self):
@@ -80,7 +82,6 @@ class CheckEntry(Frame):
                 x.grid(row=start_row, column=start_column)
                 start_row += 1
         return
-
 
 
 if __name__ == '__main__':
