@@ -1,7 +1,5 @@
 import os
 from tkinter import *
-# from check_entry import app
-from new_entry import NewEntry
 
 
 class App(Frame):
@@ -25,9 +23,8 @@ class App(Frame):
         return
 
     def convert_db(self):
-        print("working")
+        os.system("py -3 database.py")
         return
-
         # create the application
 
 
